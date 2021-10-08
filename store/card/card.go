@@ -63,6 +63,23 @@ func (c cardStore) Find(ctx context.Context, step int64) (*core.Card, error) {
 	return out, err
 }
 
+func (c cardStore) FindById(ctx context.Context, id int64) (*core.Card, error) {
+	out := &core.Card{Id: id}
+	err := c.db.View(func(queryer db.Queryer, binder db.Binder) error {
+		params, err := toParams(out)
+		if err != nil {
+			return err
+		}
+		query, args, err := binder.BindNamed(queryById, params)
+		if err != nil {
+			return err
+		}
+		row := queryer.QueryRow(query, args...)
+		return scanRow(row, out)
+	})
+	return out, err
+}
+
 func (c cardStore) FindData(ctx context.Context, id int64) (io.ReadCloser, error) {
 	out := &core.CardData{}
 	err := c.db.View(func(queryer db.Queryer, binder db.Binder) error {
@@ -166,6 +183,12 @@ WHERE card_build = :card_build
 const queryByStep = queryBase + `
 FROM cards
 WHERE card_step = :card_step
+LIMIT 1
+`
+
+const queryById = queryBase + `
+FROM cards
+WHERE card_id = :card_id
 LIMIT 1
 `
 

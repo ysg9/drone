@@ -177,6 +177,11 @@ func (s Server) Handler() http.Handler {
 			r.Use(acl.AuthorizeUser)
 		}
 
+		r.Route("/internal/{owner}/{name}", func(r chi.Router) {
+			r.Get("/cards/{id}", card.HandleFindById(s.Card, s.Repos))
+			r.Get("/cards/{id}/json", card.HandleFindDataById(s.Card, s.Repos))
+		})
+
 		r.With(
 			acl.AuthorizeAdmin,
 		).Get("/", repos.HandleAll(s.Repos))

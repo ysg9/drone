@@ -270,9 +270,10 @@ type (
 
 	// Authentication Controller configuration
 	Authentication struct {
-		Endpoint   string `envconfig:"DRONE_ADMISSION_PLUGIN_ENDPOINT"`
-		Secret     string `envconfig:"DRONE_ADMISSION_PLUGIN_SECRET"`
-		SkipVerify bool   `envconfig:"DRONE_ADMISSION_PLUGIN_SKIP_VERIFY"`
+		Endpoint           string `envconfig:"DRONE_ADMISSION_PLUGIN_ENDPOINT"`
+		Secret             string `envconfig:"DRONE_ADMISSION_PLUGIN_SECRET"`
+		SkipVerify         bool   `envconfig:"DRONE_ADMISSION_PLUGIN_SKIP_VERIFY"`
+		InternalAuthSecret string   `envconfig:"DRONE_INTERNAL_AUTH_SECRET"`
 	}
 
 	// Session provides the session configuration.

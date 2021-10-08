@@ -2976,6 +2976,21 @@ func (mr *MockCardStoreMockRecorder) FindByBuild(arg0, arg1 interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindByBuild", reflect.TypeOf((*MockCardStore)(nil).FindByBuild), arg0, arg1)
 }
 
+// FindById mocks base method.
+func (m *MockCardStore) FindById(arg0 context.Context, arg1 int64) (*core.Card, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindById", arg0, arg1)
+	ret0, _ := ret[0].(*core.Card)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindById indicates an expected call of FindById.
+func (mr *MockCardStoreMockRecorder) FindById(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindById", reflect.TypeOf((*MockCardStore)(nil).FindById), arg0, arg1)
+}
+
 // FindData mocks base method.
 func (m *MockCardStore) FindData(arg0 context.Context, arg1 int64) (io.ReadCloser, error) {
 	m.ctrl.T.Helper()

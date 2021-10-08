@@ -44,6 +44,7 @@ type CardData struct {
 type CardStore interface {
 	FindByBuild(ctx context.Context, build int64) ([]*Card, error)
 	Find(ctx context.Context, step int64) (*Card, error)
+	FindById(ctx context.Context, id int64) (*Card, error)
 	FindData(ctx context.Context, id int64) (io.ReadCloser, error)
 	Create(ctx context.Context, card *Card, data io.ReadCloser) error
 	Delete(ctx context.Context, id int64) error

@@ -66,6 +66,7 @@ func testCardCreate(store *cardStore) func(t *testing.T) {
 		}
 
 		t.Run("FindByBuild", testFindCardByBuild(store))
+		t.Run("FindById", testFindCardById(store))
 		t.Run("Find", testFindCard(store))
 		t.Run("FindData", testFindCardData(store))
 		t.Run("Delete", testCardDelete(store))
@@ -128,6 +129,17 @@ func testCardDelete(store *cardStore) func(t *testing.T) {
 		if got, want := sql.ErrNoRows, err; got != want {
 			t.Errorf("Want sql.ErrNoRows, got %v", got)
 			return
+		}
+	}
+}
+
+func testFindCardById(card *cardStore) func(t *testing.T) {
+	return func(t *testing.T) {
+		item, err := card.FindById(noContext, 1)
+		if err != nil {
+			t.Error(err)
+		} else {
+			t.Run("Fields", testCard(item))
 		}
 	}
 }
