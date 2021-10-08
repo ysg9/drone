@@ -107,7 +107,7 @@ func provideRPC(m manager.BuildManager, config config.Config) rpcHandlerV1 {
 // provideRPC2 is a Wire provider function that returns an rpc
 // handler that exposes the build manager to a remote agent.
 func provideRPC2(m manager.BuildManager, config config.Config) rpcHandlerV2 {
-	v := rpc2.NewServer(m, config)
+	v := rpc2.NewServer(m, config.RPC.Secret)
 	return rpcHandlerV2(v)
 }
 
