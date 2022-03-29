@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: build
+  image: %%{GolangDevImage}:1-alpine
+  pull: always
+  settings:
+    build_script: build.sh
+
+- name: scan
+  image: %%{NcicdDockerRepo}/cicd/nancy:latest
+  pull: always
+  failure: ignore
+  depends_on:
+  - build
+
+- name: create-image
+  image: %%{DroneDockerImage}
+  settings:
+    repo: %%{NcicdDockerRepo}/cicd/drone-server
+    dockerfile: Dockerfile.sg
+    build_args:
+    - BASE_IMAGE=%%{BaseAlpineImage}:latest
+    tags:
+    - 20220329
+  depends_on:
+  - scan
+
