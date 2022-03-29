@@ -73,7 +73,7 @@ func HandleLogin(
 		redirect := "/"
 		user, err := users.FindLogin(ctx, account.Login)
 		if err == sql.ErrNoRows {
-			redirect = "/register"
+			//redirect = "/register"
 
 			user = &core.User{
 				Login:     account.Login,
@@ -172,9 +172,9 @@ func HandleLogin(
 
 		// If the user account has not completed registration,
 		// redirect to the registration form.
-		if len(user.Email) == 0 && user.Created > 1619841600 {
-			redirect = "/register"
-		}
+		//if len(user.Email) == 0 && user.Created > 1619841600 {
+		//	redirect = "/register"
+		//}
 
 		logger.Debugf("authentication successful")
 
