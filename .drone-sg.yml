@@ -4,7 +4,7 @@ name: default
 
 trigger:
   branch:
-  - sg
+  - test
 
 steps:
 - name: build
@@ -19,16 +19,4 @@ steps:
   failure: ignore
   depends_on:
   - build
-
-- name: create-image
-  image: %%{DroneDockerImage}
-  settings:
-    repo: %%{NcicdDockerRepo}/cicd/drone-server
-    dockerfile: Dockerfile.sg
-    build_args:
-    - BASE_IMAGE=%%{BaseAlpineImage}:latest
-    tags:
-    - 20220329
-  depends_on:
-  - scan
 

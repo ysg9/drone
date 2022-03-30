@@ -4,6 +4,8 @@ replace github.com/docker/docker => github.com/docker/engine v17.12.0-ce-rc1.0.2
 
 require (
 	github.com/99designs/httpsignatures-go v0.0.0-20170731043157-88528bf4ca7e
+	github.com/Azure/azure-storage-blob-go v0.7.0
+	github.com/Azure/go-autorest/autorest/adal v0.8.3 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20180315120708-ccb8e960c48f
 	github.com/aws/aws-sdk-go v1.37.3
 	github.com/codegangsta/negroni v1.0.0 // indirect
