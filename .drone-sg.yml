@@ -28,7 +28,7 @@ steps:
     build_args:
     - BASE_IMAGE=%%{BaseAlpineImage}:latest
     tags:
-    - 20220329
+    - 20220330
   depends_on:
   - scan
 
