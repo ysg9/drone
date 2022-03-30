@@ -4,7 +4,7 @@ set -ex
 unset CGO_ENABLED
 
 # update deps
-#go mod edit -replace github.com/dgrijalva/jwt-go=github.com/dgrijalva/jwt-go/v4@v4.0.0-preview1
+go mod edit -droprequire=github.com/Azure/azure-storage-blob-go
 go mod edit -replace github.com/gogo/protobuf=github.com/gogo/protobuf@v1.3.2
 go mod tidy
 
