@@ -248,7 +248,7 @@ type (
 	Server struct {
 		Addr            string   `envconfig:"-"`
 		Host            string   `envconfig:"DRONE_SERVER_HOST" default:"localhost:8080"`
-		Port            string   `envconfig:"DRONE_SERVER_PORT" default:":8080"`
+		Port            string   `envconfig:"DRONE_SERVER_PORT"`
 		Proto           string   `envconfig:"DRONE_SERVER_PROTO" default:"http"`
 		Pprof           bool     `envconfig:"DRONE_PPROF_ENABLED"`
 		Acme            bool     `envconfig:"DRONE_TLS_AUTOCERT"`
@@ -525,8 +525,18 @@ func cleanHostname(hostname string) string {
 
 func defaultAddress(c *Config) {
 	if c.Server.Key != "" || c.Server.Cert != "" || c.Server.Acme {
-		c.Server.Port = ":443"
+		// https
+		if c.Server.Port == "" {
+			// set https default to port 443
+			c.Server.Port = ":443"
+		}
 		c.Server.Proto = "https"
+	} else {
+		// http
+		if c.Server.Port == "" {
+			// set http default to port 8080
+			c.Server.Port = ":8080"
+		}
 	}
 	c.Server.Host = cleanHostname(c.Server.Host)
 	c.Server.Addr = c.Server.Proto + "://" + c.Server.Host
