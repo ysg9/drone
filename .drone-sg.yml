@@ -31,4 +31,7 @@ steps:
     - 20220330
   depends_on:
   - scan
+  when:
+    event:
+    - promote
 
