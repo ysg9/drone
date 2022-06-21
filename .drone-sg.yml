@@ -23,7 +23,7 @@ steps:
 - name: create-image
   image: %%{DroneDockerImage}
   settings:
-    repo: %%{NcicdDockerRepo}/cicd/drone-server
+    repo: %%{NcicdDockerRepoPrivateCR}/cicd/drone-server
     dockerfile: Dockerfile.sg
     build_args:
     - BASE_IMAGE=%%{BaseAlpineImage}:latest
