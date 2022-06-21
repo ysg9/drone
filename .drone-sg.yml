@@ -14,7 +14,7 @@ steps:
     build_script: build.sh
 
 - name: scan
-  image: %%{NcicdDockerRepo}/cicd/nancy:latest
+  image: %%{NcicdDockerRepoPrivateCR}/cicd/nancy:latest
   pull: always
   failure: ignore
   depends_on:
@@ -28,7 +28,7 @@ steps:
     build_args:
     - BASE_IMAGE=%%{BaseAlpineImage}:latest
     tags:
-    - 20220520
+    - 20220621
   depends_on:
   - scan
   when:
