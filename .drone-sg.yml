@@ -14,7 +14,7 @@ steps:
     build_script: build.sh
 
 - name: scan
-  image: %%{NcicdDockerRepo}/cicd/nancy:latest
+  image: %%{NcicdDockerRepoPrivateCR}/cicd/nancy:latest
   pull: always
   failure: ignore
   depends_on:
