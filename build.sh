@@ -18,3 +18,8 @@ rm -f .dockerignore
 go list -m all > go.list
 ls -l go.list
 
+# nancy whitelist
+cat > .nancy-ignore <<EOF
+CVE-2022-29153
+CVE-2022-24687
+EOF
