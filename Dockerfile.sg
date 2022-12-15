@@ -1,5 +1,6 @@
 ARG BASE_IMAGE
 FROM $BASE_IMAGE
+SHELL ["/bin/bash", "-c"]
 RUN [[ ! -e /etc/nsswitch.conf ]] && echo 'hosts: files dns' > /etc/nsswitch.conf
 ENV GODEBUG="netdns=go" \
     XDG_CACHE_HOME=/data \
