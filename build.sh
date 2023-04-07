@@ -24,4 +24,16 @@ ls -l go.list
 # nancy whitelist
 # CVE-2022-29153: not using consul
 echo CVE-2022-29153 > .nancy-ignore
+#
+# CVE-2020-8561: Webhook redirect in kube-apiserver
+# fixed by configuring kube-apiserver with --profile=false
+# https://github.com/kubernetes/kubernetes/issues/104720
+echo CVE-2020-8561 >> .nancy-ignore
+#
+# sonatype-2022-6522: profiling info served on unix-domain socket
+# to be fixed in v0.28
+# https://github.com/kubernetes/apiserver/commit/76a233ebec7963131ddf3f59221bef5387d5b8ac
+# meanwhile, we don't use k8s in drone-server
+echo sonatype-2022-6522 >> .nancy-ignore
+#
 #CVE-2022-24687
