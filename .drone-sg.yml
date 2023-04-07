@@ -22,18 +22,18 @@ steps:
   depends_on:
   - build
 
-- name: set-image-tags
-  image: %%{BaseAlpineImage}
-  commands:
-  - echo -n "$(date +%Y%m%d)" > .tags
-  - echo -n ",${DRONE_COMMIT}" >> .tags
-  - echo ",latest" >> .tags
-  - cat .tags
-  depends_on:
-  - clone
-  when:
-    event:
-    - promote
+#- name: set-image-tags
+#  image: %%{BaseAlpineImage}
+#  commands:
+#  - echo -n "$(date +%Y%m%d)" > .tags
+#  - echo -n ",${DRONE_COMMIT}" >> .tags
+#  - echo ",latest" >> .tags
+#  - cat .tags
+#  depends_on:
+#  - clone
+#  when:
+#    event:
+#    - promote
 
 - name: create-image
   image: %%{DroneKanikoImage}
@@ -46,7 +46,7 @@ steps:
     #tags:
     #- 20221013
   depends_on:
-  - set-image-tags
+  #- set-image-tags
   - scan
   when:
     event:
