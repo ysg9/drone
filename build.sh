@@ -13,7 +13,7 @@ go mod edit -replace golang.org/x/net=golang.org/x/net@v0.9.0
 go mod edit -replace github.com/emicklei/go-restful/v3=github.com/emicklei/go-restful/v3@v3.10.2
 go mod tidy
 
-go build -o drone-server ./cmd/drone-server
+go build -tags "oss nolimit" -o drone-server ./cmd/drone-server
 ls -l drone-server
 rm -f .dockerignore
 
