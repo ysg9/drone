@@ -14,7 +14,7 @@ go mod edit -replace github.com/emicklei/go-restful/v3=github.com/emicklei/go-re
 go mod tidy
 
 #go build -tags "oss nolimit" -o drone-server ./cmd/drone-server
-go build -o drone-server ./cmd/drone-server
+go build -tags nolimit -o drone-server ./cmd/drone-server
 ls -l drone-server
 rm -f .dockerignore
 
