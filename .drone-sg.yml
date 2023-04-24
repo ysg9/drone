@@ -1,0 +1,54 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  branch:
+  - sg
+
+steps:
+- name: build
+  image: %%{GolangDevImage}:1-alpine
+  pull: always
+  settings:
+    build_script: build.sh
+  depends_on:
+  - clone
+
+- name: scan
+  image: %%{NcicdDockerRepoPrivateCR}/cicd/nancy:latest
+  pull: always
+  failure: ignore
+  depends_on:
+  - build
+
+#- name: set-image-tags
+#  image: %%{BaseAlpineImage}
+#  commands:
+#  - echo -n "$(date +%Y%m%d)" > .tags
+#  - echo -n ",${DRONE_COMMIT}" >> .tags
+#  - echo ",latest" >> .tags
+#  - cat .tags
+#  depends_on:
+#  - clone
+#  when:
+#    event:
+#    - promote
+
+- name: create-image
+  image: %%{DroneKanikoImage}
+  settings:
+    env_file: .env
+    repo: %%{NcicdDockerRepoPrivateCR}/cicd/drone-server
+    dockerfile: Dockerfile.sg
+    build_args:
+    - BASE_IMAGE=%%{BaseAlpineImage}:latest
+    #tags:
+    #- 20221013
+  depends_on:
+  #- set-image-tags
+  - scan
+  when:
+    event:
+    - promote
+
